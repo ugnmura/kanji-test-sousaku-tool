@@ -31,11 +31,11 @@
 		}
 	}
 
-	$: saved = `${window.location.origin}?${params}`;
-	$: backToFront = `${window.location.origin}/back?${params}`;
-	$: frontToBack = `${window.location.origin}/front?${params}`;
-	$: backToFrontAnswer = `${window.location.origin}/back/answer?${params}`;
-	$: frontToBackAnswer = `${window.location.origin}/front/answer?${params}`;
+	$: saved = `${window.location.origin}${window.location.pathname}?${params}`;
+	$: backToFront = `${window.location.origin}${window.location.pathname}/back?${params}`;
+	$: frontToBack = `${window.location.origin}${window.location.pathname}/front?${params}`;
+	$: backToFrontAnswer = `${window.location.origin}${window.location.pathname}/back/answer?${params}`;
+	$: frontToBackAnswer = `${window.location.origin}${window.location.pathname}/front/answer?${params}`;
 </script>
 
 <title>漢字テスト創作ツール</title>
