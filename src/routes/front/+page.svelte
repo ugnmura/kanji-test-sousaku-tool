@@ -18,8 +18,8 @@
 	<table class="table-auto w-full border-collapse border-2 border-neutral-500">
 		<thead>
 			<tr>
-				<th class="border-2 border-neutral-400 px-4 py-2 w-auto">読み</th>
-				<th class="border-2 border-neutral-400 px-4 py-2">書き</th>
+				<th class="border-2 border-neutral-400 px-4 py-2 w-auto">書き</th>
+				<th class="border-2 border-neutral-400 px-4 py-2">読み</th>
 			</tr>
 		</thead>
 		<tbody>

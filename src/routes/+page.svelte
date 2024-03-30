@@ -13,6 +13,11 @@
 		vocabList = [...vocabList, { front: '', back: '' }];
 	};
 
+	const removeVocabField = () => {
+		vocabList.pop();
+		vocabList = vocabList;
+	};
+
 	onMount(() => {
 		const searchParams = new URLSearchParams(window.location.search);
 		vocabList = Array.from(searchParams.entries()).map(([front, back]) => ({
@@ -50,20 +55,29 @@
 			</div>
 		{/each}
 		<button class="border p-1" on:click={addVocabField}>Add</button>
+		<button class="border p-1" on:click={removeVocabField}>Remove</button>
 	</div>
 	{#if params}
-		<div class="mt-4">
-			<h3 class="text-lg font-bold">書き => 読み</h3>
-			<a class="text-blue-500" href={frontToBack} target="_blank">{frontToBack}</a>
+		<div class="mt-4 space-y-4">
+			<div>
+				<h3 class="text-lg font-bold">読み => 書き</h3>
+				<a class="text-blue-500" href={frontToBack} target="_blank">リンク</a>
+			</div>
 
-			<h3 class="text-lg font-bold">書き => 読み 答え</h3>
-			<a class="text-blue-500" href={frontToBackAnswer} target="_blank">{frontToBackAnswer}</a>
+			<div>
+				<h3 class="text-lg font-bold">読み => 書き 答え</h3>
+				<a class="text-blue-500" href={frontToBackAnswer} target="_blank">リンク</a>
+			</div>
 
-			<h3 class="text-lg font-bold">読み => 書き</h3>
-			<a class="text-blue-500" href={backToFront} target="_blank">{backToFront}</a>
+			<div>
+				<h3 class="text-lg font-bold">書き => 読み</h3>
+				<a class="text-blue-500" href={backToFront} target="_blank">リンク</a>
+			</div>
 
-			<h3 class="text-lg font-bold">読み => 書き 答え</h3>
-			<a class="text-blue-500" href={backToFrontAnswer} target="_blank">{backToFrontAnswer}</a>
+			<div>
+				<h3 class="text-lg font-bold">書き => 読み 答え</h3>
+				<a class="text-blue-500" href={backToFrontAnswer} target="_blank">リンク</a>
+			</div>
 		</div>
 	{/if}
 </div>
