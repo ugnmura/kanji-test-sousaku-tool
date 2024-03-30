@@ -36,6 +36,36 @@
 		}
 	}
 
+	const handleFileChange = async (event: Event) => {
+		const input = event.target as HTMLInputElement;
+		if (!input.files?.length) return;
+
+		const file = input.files[0];
+		if (file) {
+			const text = await file.text();
+			parseCSV(text);
+		}
+	};
+
+	const parseCSV = (text: string) => {
+		const lines = text.split('\n');
+
+		let params = lines
+			.map((line) => {
+				const [front, back] = line.split(';');
+				if (front && back) {
+					return { front: front.trim(), back: back.trim() };
+				}
+
+				return { front: '', back: '' };
+			})
+			.filter(({ front, back }) => front && back)
+			.map(({ front, back }) => `${encodeURIComponent(front)}=${encodeURIComponent(back)}`)
+			.join('&');
+
+		window.location.replace(`${window.location.origin}${window.location.pathname}?${params}`);
+	};
+
 	$: saved = `${window.location.origin}${window.location.pathname}?${params}`;
 	$: backToFront = `${window.location.origin}${window.location.pathname}/back?${params}`;
 	$: frontToBack = `${window.location.origin}${window.location.pathname}/front?${params}`;
@@ -80,4 +110,6 @@
 			</div>
 		</div>
 	{/if}
+
+	<input type="file" accept=".csv" on:change={handleFileChange} />
 </div>
