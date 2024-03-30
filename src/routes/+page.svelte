@@ -67,10 +67,10 @@
 	};
 
 	$: saved = `${window.location.origin}${window.location.pathname}?${params}`;
-	$: backToFront = `${window.location.origin}${window.location.pathname}/back?${params}`;
-	$: frontToBack = `${window.location.origin}${window.location.pathname}/front?${params}`;
-	$: backToFrontAnswer = `${window.location.origin}${window.location.pathname}/back/answer?${params}`;
-	$: frontToBackAnswer = `${window.location.origin}${window.location.pathname}/front/answer?${params}`;
+	$: backToFront = `${window.location.origin}${window.location.pathname}back?${params}`;
+	$: frontToBack = `${window.location.origin}${window.location.pathname}front?${params}`;
+	$: backToFrontAnswer = `${window.location.origin}${window.location.pathname}back/answer?${params}`;
+	$: frontToBackAnswer = `${window.location.origin}${window.location.pathname}front/answer?${params}`;
 </script>
 
 <title>漢字テスト創作ツール</title>
@@ -90,22 +90,22 @@
 	{#if params}
 		<div class="mt-4 space-y-4">
 			<div>
-				<h3 class="text-lg font-bold">読み => 書き</h3>
+				<h3 class="text-lg font-bold">読み</h3>
 				<a class="text-blue-500" href={frontToBack} target="_blank">リンク</a>
 			</div>
 
 			<div>
-				<h3 class="text-lg font-bold">読み => 書き 答え</h3>
+				<h3 class="text-lg font-bold">読み 答え</h3>
 				<a class="text-blue-500" href={frontToBackAnswer} target="_blank">リンク</a>
 			</div>
 
 			<div>
-				<h3 class="text-lg font-bold">書き => 読み</h3>
+				<h3 class="text-lg font-bold">書き</h3>
 				<a class="text-blue-500" href={backToFront} target="_blank">リンク</a>
 			</div>
 
 			<div>
-				<h3 class="text-lg font-bold">書き => 読み 答え</h3>
+				<h3 class="text-lg font-bold">書き 答え</h3>
 				<a class="text-blue-500" href={backToFrontAnswer} target="_blank">リンク</a>
 			</div>
 		</div>
