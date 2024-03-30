@@ -1,13 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type { Vocab } from '$lib/types';
+	import DownloadSection from '$lib/DownloadSection.svelte';
 
 	let vocabList: Vocab[] = [];
-
 	$: params = vocabList
 		.filter(({ front, back }) => front && back)
 		.map(({ front, back }) => `${encodeURIComponent(front)}=${encodeURIComponent(back)}`)
 		.join('&');
+
+	let shuffledVocabList: Vocab[] = [];
 
 	const addVocabField = () => {
 		vocabList = [...vocabList, { front: '', back: '' }];
@@ -16,6 +18,27 @@
 	const removeVocabField = () => {
 		vocabList.pop();
 		vocabList = vocabList;
+	};
+
+	function shuffleArray<T>(array: T[]): T[] {
+		const result = array.slice();
+		for (let i = result.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[result[i], result[j]] = [result[j], result[i]];
+		}
+		return result;
+	}
+
+	const selectRandomVocabs = () => {
+		// If there are 20 or fewer vocab entries, select all of them
+		if (vocabList.length <= 20) {
+			const shuffled = shuffleArray(vocabList);
+			shuffledVocabList = shuffled;
+		} else {
+			// If there are more than 20, shuffle and then select the first 20
+			const shuffled = shuffleArray(vocabList);
+			shuffledVocabList = shuffled.slice(0, 20);
+		}
 	};
 
 	onMount(() => {
@@ -71,16 +94,12 @@
 	};
 
 	$: saved = `${window.location.origin}${window.location.pathname}?${params}`;
-	$: backToFront = `${window.location.origin}${window.location.pathname}back?${params}`;
-	$: frontToBack = `${window.location.origin}${window.location.pathname}front?${params}`;
-	$: backToFrontAnswer = `${window.location.origin}${window.location.pathname}back/answer?${params}`;
-	$: frontToBackAnswer = `${window.location.origin}${window.location.pathname}front/answer?${params}`;
 </script>
 
 <title>漢字テスト創作ツール</title>
 
-<div class="m-4">
-	<h1 class="text-lg font-bold">漢字テスト創作ツール</h1>
+<div class="m-4 space-y-4">
+	<h1 class="text-3xl font-bold">漢字テスト創作ツール</h1>
 	<div>
 		{#each vocabList as { front, back }}
 			<div class="flex gap-2 mb-2">
@@ -91,34 +110,32 @@
 		<button class="border p-1" on:click={addVocabField}>追加</button>
 		<button class="border p-1" on:click={removeVocabField}>削除</button>
 	</div>
-	{#if params}
-		<div class="mt-4 space-y-4">
-			<div>
-				<h3 class="text-lg font-bold">読み</h3>
-				<a class="text-blue-500" href={frontToBack} target="_blank">リンク</a>
-			</div>
 
-			<div>
-				<h3 class="text-lg font-bold">読み 答え</h3>
-				<a class="text-blue-500" href={frontToBackAnswer} target="_blank">リンク</a>
-			</div>
+	<hr />
 
-			<div>
-				<h3 class="text-lg font-bold">書き</h3>
-				<a class="text-blue-500" href={backToFront} target="_blank">リンク</a>
-			</div>
+	<div>
+		<h2 class="text-xl font-bold">すべての単語</h2>
+		<DownloadSection {vocabList} />
+	</div>
 
-			<div>
-				<h3 class="text-lg font-bold">書き 答え</h3>
-				<a class="text-blue-500" href={backToFrontAnswer} target="_blank">リンク</a>
-			</div>
-		</div>
-	{/if}
+	<hr />
 
-	<br />
+	<div>
+		<h2 class="text-xl font-bold">テスト作成</h2>
+		<DownloadSection vocabList={shuffledVocabList} />
+		<button class="border p-1" on:click={selectRandomVocabs}>作成</button>
+	</div>
 
-	<h3>.csvファイルをインポート</h3>
-	<input type="file" accept=".csv" on:change={handleFileChange} />
+	<hr />
 
-	<button class="border p-1" on:click={clearAll}>リセット</button>
+	<div>
+		<h2 class="text-xl font-bold">.csvファイルをインポート</h2>
+		<input type="file" accept=".csv" on:change={handleFileChange} />
+	</div>
+
+	<hr />
+
+	<div>
+		<button class="border p-1" on:click={clearAll}>リセット</button>
+	</div>
 </div>
