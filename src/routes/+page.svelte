@@ -66,6 +66,10 @@
 		window.location.replace(`${window.location.origin}${window.location.pathname}?${params}`);
 	};
 
+	const clearAll = () => {
+		window.location.replace(`${window.location.origin}${window.location.pathname}`);
+	};
+
 	$: saved = `${window.location.origin}${window.location.pathname}?${params}`;
 	$: backToFront = `${window.location.origin}${window.location.pathname}back?${params}`;
 	$: frontToBack = `${window.location.origin}${window.location.pathname}front?${params}`;
@@ -84,8 +88,8 @@
 				<input type="text" placeholder="読み" class="border p-1" bind:value={back} />
 			</div>
 		{/each}
-		<button class="border p-1" on:click={addVocabField}>Add</button>
-		<button class="border p-1" on:click={removeVocabField}>Remove</button>
+		<button class="border p-1" on:click={addVocabField}>追加</button>
+		<button class="border p-1" on:click={removeVocabField}>削除</button>
 	</div>
 	{#if params}
 		<div class="mt-4 space-y-4">
@@ -111,5 +115,10 @@
 		</div>
 	{/if}
 
+	<br />
+
+	<h3>.csvファイルをインポート</h3>
 	<input type="file" accept=".csv" on:change={handleFileChange} />
+
+	<button class="border p-1" on:click={clearAll}>リセット</button>
 </div>
