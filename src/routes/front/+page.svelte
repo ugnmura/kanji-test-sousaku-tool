@@ -13,22 +13,24 @@
 	});
 </script>
 
-<div class="w-full px-8 py-4 flex flex-col items-center mt-4">
-	<h2 class="text-xl mb-4">漢字テスト</h2>
-	<table class="table-auto w-full border-collapse border-2 border-neutral-500">
+<svelte:head>
+	<title>漢字テスト — 読み</title>
+</svelte:head>
+
+<div class="p-4">
+	<h2 class="text-lg font-semibold mb-3">漢字テスト（読み）</h2>
+	<table class="w-full border-collapse">
 		<thead>
 			<tr>
-				<th class="border-2 border-neutral-400 px-4 py-2 w-auto">書き</th>
-				<th class="border-2 border-neutral-400 px-4 py-2">読み</th>
+				<th class="border border-gray-600 px-3 py-2 text-left font-medium">書き</th>
+				<th class="border border-gray-600 px-3 py-2 text-left font-medium">読み</th>
 			</tr>
 		</thead>
 		<tbody>
 			{#each vocabList as { front }}
 				<tr>
-					<td class="w-[1px] whitespace-nowrap border-2 border-neutral-400 px-4 py-2 w-auto"
-						>{front}</td
-					>
-					<td class="w-full border-2 border-neutral-400 px-4 py-2"></td>
+					<td class="border border-gray-600 px-3 py-3 whitespace-nowrap w-0">{front}</td>
+					<td class="border border-gray-600 px-3 py-3 w-full"></td>
 				</tr>
 			{/each}
 		</tbody>

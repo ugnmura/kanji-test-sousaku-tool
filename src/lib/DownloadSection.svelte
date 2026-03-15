@@ -15,25 +15,53 @@
 </script>
 
 {#if params}
-	<div class="mt-4 space-y-4">
-		<div>
-			<h3 class="text-lg font-bold">読み</h3>
-			<a class="text-blue-500" href={frontToBack} target="_blank">リンク</a>
-		</div>
+	<div class="grid grid-cols-2 gap-3">
+		<a
+			href={frontToBack}
+			target="_blank"
+			class="flex items-center justify-between px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-300 transition-colors group"
+		>
+			<div>
+				<p class="text-sm font-medium text-gray-800">読みテスト</p>
+				<p class="text-xs text-gray-400">かんじ → よみ</p>
+			</div>
+			<span class="text-indigo-500 text-xs font-medium group-hover:underline">開く →</span>
+		</a>
 
-		<div>
-			<h3 class="text-lg font-bold">読み 答え</h3>
-			<a class="text-blue-500" href={frontToBackAnswer} target="_blank">リンク</a>
-		</div>
+		<a
+			href={frontToBackAnswer}
+			target="_blank"
+			class="flex items-center justify-between px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-300 transition-colors group"
+		>
+			<div>
+				<p class="text-sm font-medium text-gray-800">読み答え</p>
+				<p class="text-xs text-gray-400">かんじ → よみ 答え</p>
+			</div>
+			<span class="text-indigo-500 text-xs font-medium group-hover:underline">開く →</span>
+		</a>
 
-		<div>
-			<h3 class="text-lg font-bold">書き</h3>
-			<a class="text-blue-500" href={backToFront} target="_blank">リンク</a>
-		</div>
+		<a
+			href={backToFront}
+			target="_blank"
+			class="flex items-center justify-between px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-300 transition-colors group"
+		>
+			<div>
+				<p class="text-sm font-medium text-gray-800">書きテスト</p>
+				<p class="text-xs text-gray-400">よみ → かんじ</p>
+			</div>
+			<span class="text-indigo-500 text-xs font-medium group-hover:underline">開く →</span>
+		</a>
 
-		<div>
-			<h3 class="text-lg font-bold">書き 答え</h3>
-			<a class="text-blue-500" href={backToFrontAnswer} target="_blank">リンク</a>
-		</div>
+		<a
+			href={backToFrontAnswer}
+			target="_blank"
+			class="flex items-center justify-between px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-indigo-50 hover:border-indigo-300 transition-colors group"
+		>
+			<div>
+				<p class="text-sm font-medium text-gray-800">書き答え</p>
+				<p class="text-xs text-gray-400">よみ → かんじ 答え</p>
+			</div>
+			<span class="text-indigo-500 text-xs font-medium group-hover:underline">開く →</span>
+		</a>
 	</div>
 {/if}
